@@ -1,26 +1,63 @@
-import {StyleSheet, Text, TextInput, View} from 'react-native';
-import React from 'react';
+import {Alert, StyleSheet, Text, TextInput, View} from 'react-native';
+import React, {useState} from 'react';
 import PrimaryButton from '../../components/PrimaryButton';
 
-const index = () => {
+const StartGameScreen = () => {
+  const [enteredNumber, setEnteredNumber] = useState('');
+
+  const numberInputHandler = inputText => {
+    setEnteredNumber(inputText);
+  };
+  const resetInputHandler = () => {
+    setEnteredNumber('');
+  };
+  const confirmInputHandler = () => {
+    const chosenNumber = parseInt(enteredNumber);
+    if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber >= 99) {
+      Alert.alert(
+        'Invalid Number',
+        'Number has to be a number between 1 and 99',
+        [
+          {
+            text: 'Okay',
+            onPress: resetInputHandler,
+            style: 'destructive',
+          },
+        ],
+        {
+          cancelable: true,
+        },
+      );
+    }
+  };
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.numberInput}
         maxLength={2}
         keyboardType="number-pad"
+        value={enteredNumber}
+        onChangeText={numberInputHandler}
       />
-      <PrimaryButton>Reset</PrimaryButton>
-      <PrimaryButton>Confirm</PrimaryButton>
+      <View style={styles.buttonsContainer}>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+        </View>
+        <View style={styles.buttonContainer}>
+          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
+        </View>
+      </View>
     </View>
   );
 };
 
-export default index;
+export default StartGameScreen;
 
 const styles = StyleSheet.create({
   inputContainer: {
-    // flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 100,
     padding: 16,
     backgroundColor: '#00C4FF',
@@ -31,6 +68,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 10,
     elevation: 14,
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+  },
+  buttonContainer: {
+    flex: 1,
   },
   numberInput: {
     height: 50,

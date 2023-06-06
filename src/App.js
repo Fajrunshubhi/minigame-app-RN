@@ -6,19 +6,32 @@
  */
 
 import React from 'react';
-import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
 import StartGameScreen from './screens/StartGameScreen';
+import LinearGradient from 'react-native-linear-gradient';
 
 const App = () => {
-  return <StartGameScreen />;
+  return (
+    <LinearGradient
+      colors={['#0079FF', '#FFB84C', '#F6FA70']}
+      style={styles.rootApp}>
+      <ImageBackground
+        source={require('./assets/images/bg.jpg')}
+        resizeMode="cover"
+        style={styles.rootApp}
+        imageStyle={styles.bgImage}>
+        <StartGameScreen />
+      </ImageBackground>
+    </LinearGradient>
+  );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  rootApp: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  bgImage: {
+    opacity: 0.5,
   },
 });
 

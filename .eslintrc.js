@@ -11,4 +11,5 @@ module.exports = {
       },
     ],
   },
+  radix: false,
 };
