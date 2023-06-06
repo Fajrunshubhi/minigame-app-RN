@@ -16,5 +16,6 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: 12,
     borderColor: 'yellow',
+    fontFamily: 'Righteous-Regular',
   },
 });

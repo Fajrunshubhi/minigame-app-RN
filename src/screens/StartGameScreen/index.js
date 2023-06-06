@@ -41,6 +41,7 @@ const StartGameScreen = props => {
       <Title>Guess My Number</Title>
       <Card>
         <Text style={styles.instructionText}>Enter a Number</Text>
+        <Text style={styles.cekFont}>Ini menggunakan font baru</Text>
         <TextInput
           style={styles.numberInput}
           maxLength={2}
@@ -71,6 +72,12 @@ const styles = StyleSheet.create({
   instructionText: {
     color: Colors.primary500,
     fontSize: 24,
+    fontFamily: 'Righteous-Regular',
+  },
+  cekFont: {
+    fontSize: 24,
+    color: 'red',
+    fontFamily: 'Righteous-Regular',
   },
   buttonsContainer: {
     flexDirection: 'row',
