@@ -2,6 +2,8 @@ import {Alert, StyleSheet, Text, TextInput, View} from 'react-native';
 import React, {useState} from 'react';
 import PrimaryButton from '../../components/ui/PrimaryButton';
 import Colors from '../../utils/colors';
+import Title from '../../components/ui/Title';
+import Card from '../../components/ui/Card';
 
 const StartGameScreen = props => {
   const [enteredNumber, setEnteredNumber] = useState('');
@@ -35,22 +37,26 @@ const StartGameScreen = props => {
   };
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.numberInput}
-        maxLength={2}
-        keyboardType="number-pad"
-        value={enteredNumber}
-        onChangeText={numberInputHandler}
-      />
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+    <View style={styles.rootContainer}>
+      <Title>Guess My Number</Title>
+      <Card>
+        <Text style={styles.instructionText}>Enter a Number</Text>
+        <TextInput
+          style={styles.numberInput}
+          maxLength={2}
+          keyboardType="number-pad"
+          value={enteredNumber}
+          onChangeText={numberInputHandler}
+        />
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
+          </View>
         </View>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
-        </View>
-      </View>
+      </Card>
     </View>
   );
 };
@@ -58,19 +64,13 @@ const StartGameScreen = props => {
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  rootContainer: {
     marginTop: 100,
-    padding: 16,
-    backgroundColor: Colors.scColor,
-    marginHorizontal: 20,
-    borderRadius: 10,
-    shadowColor: 'black',
-    shadowOffset: {width: 0, height: 7},
-    shadowOpacity: 0.5,
-    shadowRadius: 10,
-    elevation: 14,
+    alignItems: 'center',
+  },
+  instructionText: {
+    color: Colors.primary500,
+    fontSize: 24,
   },
   buttonsContainer: {
     flexDirection: 'row',
