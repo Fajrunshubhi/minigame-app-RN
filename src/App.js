@@ -5,12 +5,28 @@
  * @format
  */
 
-import React from 'react';
-import {ImageBackground, StatusBar, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {
+  ImageBackground,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+} from 'react-native';
 import StartGameScreen from './screens/StartGameScreen';
+import GameScreen from './screens/GameScreen';
 import LinearGradient from 'react-native-linear-gradient';
 
 const App = () => {
+  const [userNumber, setUserNumber] = useState();
+  const pickedNumberHandler = pickedNumber => {
+    setUserNumber(pickedNumber);
+  };
+  let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
+  if (userNumber) {
+    screen = <GameScreen />;
+  }
   return (
     <LinearGradient
       colors={['#0079FF', '#FFB84C', '#F6FA70']}
@@ -20,7 +36,7 @@ const App = () => {
         resizeMode="cover"
         style={styles.rootApp}
         imageStyle={styles.bgImage}>
-        <StartGameScreen />
+        <SafeAreaView style={styles.rootApp}>{screen}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
   );
